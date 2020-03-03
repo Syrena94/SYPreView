@@ -263,6 +263,8 @@ extension SYPreviewCollectionViewCell:UIScrollViewDelegate{
         
         imgView.center = CGPoint.init(x: scroContainer.contentSize.width*0.5+contentX, y: scroContainer.contentSize.height*0.5+contentY)
     }
+    
+    
 }
 
 extension SYPreviewCollectionViewCell:UIGestureRecognizerDelegate{
