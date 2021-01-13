@@ -1,0 +1,21 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'SYPreView' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for SYPreView
+
+  #preview用到这两个库的东西
+pod 'SwifterSwift' 
+pod 'Kingfisher'
+
+#以下这些是demo中用到的,使用preview不需要用到
+pod 'Alamofire'
+pod 'SwiftyJSON'
+pod 'HandyJSON'
+pod 'RxSwift'
+pod 'RxCocoa'
+
+end
