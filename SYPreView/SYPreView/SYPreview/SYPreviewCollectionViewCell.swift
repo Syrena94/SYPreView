@@ -86,6 +86,7 @@ class SYPreviewCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(scroContainer)
         imgView = UIImageView.init()
         imgView.backgroundColor = UIColor.clear
+        //imgView.contentMode = .scaleAspectFill
         
         
         scroContainer.addSubview(imgView)

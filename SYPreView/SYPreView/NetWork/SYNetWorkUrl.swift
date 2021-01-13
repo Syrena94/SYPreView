@@ -9,10 +9,5 @@
 import Foundation
 
 
-let testUrl  = "/message/queryAdvertList"
 
-
-let loanurl = "/api/home/market"
-
-
-let newUrl = "http://toutiao-ali.juheapi.com/toutiao/index"
+let newUrl = "http://v.juhe.cn/toutiao/index"

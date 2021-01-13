@@ -41,7 +41,7 @@ class ViewModel: NSObject {
     override init() {
         super.init()
         
-        let ob = SYNetTool<SYApiModel>.RxmakeRequest(baseUrl: newUrl)
+        let ob = SYNetTool<SYApiModel>.RxmakeRequest(baseUrl: newUrl,parameters: ["key":"6507842fb38c121e250e5143de303de3"])
         ob
             .subscribe(onNext: {[weak self](result) in
                 switch result {

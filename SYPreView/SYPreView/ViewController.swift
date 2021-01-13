@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Kingfisher
 
 class ViewController: UIViewController {
     
@@ -17,17 +18,21 @@ class ViewController: UIViewController {
     var viewModel:ViewModel!
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+        
         tabV = UITableView.init(frame: CGRect.zero, style: .grouped)
         tabV.register(ImgTableViewCell.self, forCellReuseIdentifier: "ImgTableViewCell")
         tabV.frame = view.bounds
         tabV.rowHeight = 100
         view.addSubview(tabV)
-        
+
         viewModel = ViewModel.init()
-        
-        
+
+
         viewModel.dataSource
             .bind(to: (tabV?.rx.items)!){(tab,index,model)->UITableViewCell in
                 let cell = tab.dequeueReusableCell(withIdentifier: "ImgTableViewCell") as! ImgTableViewCell
@@ -35,8 +40,8 @@ class ViewController: UIViewController {
                 return cell
         }
         .disposed(by: disposeBag)
-        
-        
+
+
         tabV.rx.itemSelected
             .subscribe(onNext:{[weak self]indexpath in
                 var arr:[String] = []
@@ -65,4 +70,6 @@ extension ViewController:SYPicturePreViewDelegate{
         return nil
     }
 }
+
+
 
