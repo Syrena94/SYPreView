@@ -20,6 +20,8 @@ class ImgTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
         img = UIImageView.init(frame: CGRect(x: 15, y: 10, width: 80, height: 80))
+        img.contentMode = .scaleAspectFill
+        img.layer.masksToBounds = true
         contentView.addSubview(img)
     }
     

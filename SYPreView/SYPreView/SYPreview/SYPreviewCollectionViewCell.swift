@@ -53,9 +53,13 @@ class SYPreviewCollectionViewCell: UICollectionViewCell {
         imgUrl = img
         animation = isAnimation
         isfirst = first
-        imgView.kf.setImage(with: URL.init(string: imgUrl), placeholder: UIImage.init(color: UIColor.white, size: CGSize(width: bounds.width, height: 300))) { [weak self](result) in
-            //图片加载完成时重新去计算大小
-            self?.reSetImgSize()
+        if let url = imgUrl as? String {
+            imgView.kf.setImage(with: URL.init(string: url), placeholder: UIImage.init(color: UIColor.clear, size: CGSize(width: bounds.width, height: 300))) { [weak self](result) in
+                self?.reSetImgSize()
+            }
+        }
+        if let image = imgUrl as? UIImage {
+            imgView.image = image
         }
         reSetImgSize()
     }
@@ -86,8 +90,9 @@ class SYPreviewCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(scroContainer)
         imgView = UIImageView.init()
         imgView.backgroundColor = UIColor.clear
-        //imgView.contentMode = .scaleAspectFill
-        
+
+        imgView.contentMode = .scaleAspectFill
+        imgView.clipsToBounds = true
         
         scroContainer.addSubview(imgView)
         if #available(iOS 11.0, *) {
@@ -229,21 +234,22 @@ class SYPreviewCollectionViewCell: UICollectionViewCell {
         scroContainer.contentSize = containerframe.size
         //回到初始位置
         scroContainer.scrollRectToVisible(frame, animated: false)
+        
         scroContainer.setZoomScale(1, animated: false)
-        
-        
         //当1. 是否动画为true 2. 起始位置不为原点size 3. 第一个显示的图片 都满足时 才已放大的形式打开
-        if animation == true && !delegate.getFromFrame().equalTo(CGRect.zero) && isfirst {
-            isfirst = false
-            imgView.frame = delegate.getFromFrame()
-            UIView.animate(withDuration: 0.2) {[weak self] in
-                self?.imgView.frame = containerframe
-                self?.backgroundColor = UIColor.black
+        //DispatchQueue.main.async {[unowned self] in
+            if self.animation == true && !self.delegate.getFromFrame().equalTo(CGRect.zero) && self.isfirst {
+                self.isfirst = false
+                self.imgView.frame = self.delegate.getFromFrame()
+                UIView.animate(withDuration: 0.2) {[weak self] in
+                    self?.imgView.frame = containerframe
+                    self?.backgroundColor = UIColor.black
+                }
+            }else{
+                backgroundColor = UIColor.black
+                self.imgView.frame = containerframe
+                self.scroContainer.contentSize = containerframe.size
             }
-        }else{
-            backgroundColor = UIColor.black
-            imgView.frame = containerframe
-        }
         
     }
 }
